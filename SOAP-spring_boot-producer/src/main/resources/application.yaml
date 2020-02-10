@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: microservices-kafka-avro
+  kafka:    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: consumerGroup10
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      max-poll-records: 1
+      enable-auto-commit: false
+      
+      
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    topics:  UNITED_KINGDOM
+    #,SINGAPORE,CYPRUS,HONG_KONG,PORTUGAL,ICELAND,MALTA,GREECE,SAUDI_ARABIA,
+    #              NETHERLANDS,SWEDEN,AUSTRIA,POLAND,BRAZIL,FRANCE,LITHUANIA,RSA,
+#USA,JAPAN,CHANNEL_ISLANDS,EUROPEAN_COMMUNITY,
+#                  UNITED_KINGDOM,UNITED_ARAB_EMIRATES,UNSPECIFIED,SWITZERLAND,BAHRAIN,SPAIN,LEBANON,
+#                  CANADA,CZECH_REPUBLIC,BELGIUM,NORWAY,EIRE,FINLAND,DENMARK,ITALY,ISRAEL,AUSTRALIA, GERMANY
+key:
+  converter:
+    schema:
+      registry:
+        url: http://localhost:8081
+value:
+  converter:
+    schema:
+      registry:
+        url: http://localhost:8081
+        
